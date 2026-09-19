@@ -126,6 +126,13 @@ This is easiest for a lab.
 kubectl port-forward svc/argocd-server \
   -n argocd 8080:443
 ```
+or 
+```bash
+kubectl port-forward svc/argocd-server \
+  -n argocd \
+  8080:443 \
+  --address=0.0.0.0
+```
 
 Open:
 
@@ -261,25 +268,23 @@ Add:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nks-web
+  name: nks-web  # 🚀 Name of the Deployment
 spec:
-  replicas: 2
-
+  replicas: 1  # 🚶 Number of desired replicas
   selector:
     matchLabels:
-      app: nks-web
-
+      app: cafe  # 🏷️ Selector to match pods with the label "app: cafe"
   template:
     metadata:
       labels:
-        app: nks-web
-
+        app: cafe  # 🏷️ Labels applied to pods created by this template
     spec:
       containers:
-        - name: web
-          image: nginx:1.27
+        - name: my-app-container  # 📦 Name of the container
+          image: nextkodeschool/wavecafe:latest  # 🐳 Docker image to use
           ports:
-            - containerPort: 80
+            - name: cafe-port  # 🌐 Name of the port
+              containerPort: 80  # 🚪 Port that the container listens on
 ```
 
 Notice that we're not hardcoding a namespace here. We'll let the Argo CD Application determine the destination namespace.
@@ -298,20 +303,18 @@ Add:
 
 ```yaml
 apiVersion: v1
+apiVersion: v1
 kind: Service
 metadata:
-  name: nks-web-service
-
+  name: nks-web-service # ☕ Name of the Service
 spec:
   selector:
-    app: nks-web
-
+    app: cafe  # 🏷️ Select pods with the label "app: cafe"
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-
-  type: ClusterIP
+    - protocol: TCP  # 🌐 Protocol for the port
+      port: 80  # 🚪 Port on the Service
+      targetPort: cafe-port  # 🚀 Port on the pods to forward traffic to
+  type: NodePort  # 🏢 Expose the Service as a NodePort
 ```
 
 ---
@@ -609,13 +612,13 @@ Now test automatic synchronization.
 Your current Deployment has:
 
 ```yaml
-image: nginx:1.27
+image: nextkodeschool/wavecafe:latest
 ```
 
 Change it to another valid tag, for example:
 
 ```yaml
-image: nginx:1.28
+image: nextkodeschool/highway:latest
 ```
 
 Then:
