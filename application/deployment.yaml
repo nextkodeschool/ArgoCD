@@ -1,22 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nks-web
+  name: nks-wavecafe  # 🚀 Name of the Deployment
 spec:
-  replicas: 3
-
+  replicas: 1  # 🚶 Number of desired replicas
   selector:
     matchLabels:
-      app: nks-web
-
+      app: cafe  # 🏷️ Selector to match pods with the label "app: cafe"
   template:
     metadata:
       labels:
-        app: nks-web
-
+        app: cafe  # 🏷️ Labels applied to pods created by this template
     spec:
       containers:
-        - name: web
-          image: nginx:1.27
+        - name: my-app-container  # 📦 Name of the container
+          image: nextkodeschool/wavecafe:latest  # 🐳 Docker image to use
           ports:
-            - containerPort: 80
+            - name: cafe-port  # 🌐 Name of the port
+              containerPort: 80  # 🚪 Port that the container listens on
