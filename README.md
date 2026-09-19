@@ -238,7 +238,7 @@ cd nks-argocd
 
 Create this structure:
 
-```text
+```yaml
 nks-argocd/
 │
 └── application/
