@@ -153,7 +153,7 @@ Keep the terminal running while using the UI.
 
 ---
 
-# 5. Alternative — NodePort
+# 5. Alternative — NodePort (optional)
 
 For a lab cluster where you want to access Argo CD through a worker node:
 
@@ -192,7 +192,7 @@ Your firewall/security group must allow that NodePort if you're accessing it ext
 
 ---
 
-# 6. Alternative — LoadBalancer
+# 6. Alternative — LoadBalancer (optional)
 
 If your Kubernetes environment supports `LoadBalancer` services:
 
