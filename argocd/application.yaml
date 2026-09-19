@@ -9,7 +9,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/nextkodeschook/ArgoCD.git
+    repoURL: https://github.com/nextkodeschool/ArgoCD.git
 
     targetRevision: main
 
