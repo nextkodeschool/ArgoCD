@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: my-app-container  # 📦 Name of the container
-          image: nextkodeschool/wavecafe:latest  # 🐳 Docker image to use
+          image: nextkodeschool/nks-frontend:latest  # 🐳 Docker image to use
           ports:
             - name: cafe-port  # 🌐 Name of the port
               containerPort: 80  # 🚪 Port that the container listens on
